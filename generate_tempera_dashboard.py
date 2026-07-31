@@ -13,15 +13,15 @@ def generate_dashboard():
     except:
         crm_grouped = pd.DataFrame(columns=['Vendedor', 'Novos_Cadastros', 'Cotacoes', 'Interacoes_CRM'])
 
-    clientes_path = r'C:\Users\Isac\Desktop\Planilhas geradas pela IA\Clientes_Detalhes_Extras.xlsx'
-    interacoes_path = r'C:\Users\Isac\Desktop\Planilhas geradas pela IA\Interacoes_Sistema.xlsx'
-    propostas_path = r"C:\Users\Isac\Desktop\Planilhas geradas pela IA\Propostas_Sistema.xlsx"
-    nfe_path = r"C:\Users\Isac\Desktop\Planilhas geradas pela IA\Notas_Fiscais_Sistema.xlsx"
+    clientes_path = r'Clientes_Detalhes_Extras.xlsx'
+    interacoes_path = r'Interacoes_Sistema.xlsx'
+    propostas_path = r"Propostas_Sistema.xlsx"
+    nfe_path = r"Notas_Fiscais_Sistema.xlsx"
     
-    df_clientes = pd.read_excel(clientes_path)
-    df_interacoes = pd.read_excel(interacoes_path)
-    df_propostas = pd.read_excel(propostas_path)
-    df_nfe = pd.read_excel(nfe_path, engine='openpyxl')
+    df_clientes = pd.DataFrame(columns=['Razao_Social', 'Data_Cadastro', 'Cidade', 'Estado', 'Vendedor', 'Ramo_Atividade', 'Total_Gasto_Geral'])
+    df_interacoes = pd.DataFrame(columns=['Vendedor', 'Tipo_Interacao', 'Status', 'Data_Interacao', 'Cliente'])
+    df_propostas = pd.DataFrame(columns=['Vendedor', 'Status', 'Valor_Total', 'Data_Proposta'])
+    df_nfe = pd.DataFrame(columns=['Vendedor', 'DataEmissao', 'CFOP', 'ValorTotalNF', 'ClienteNome', 'MesEmissao', 'AnoEmissao', 'Trimestre'])
 
     try:
         cfop_counts = df_nfe['CFOP'].value_counts().head(5)
@@ -43,7 +43,7 @@ def generate_dashboard():
 
 
     try:
-        pot_clientes_df = pd.read_excel(r'C:\Users\Isac\Desktop\Planilhas geradas pela IA\Potenciais_Clientes_150.xlsx')
+        pot_clientes_df = pd.read_excel(r'Potenciais_Clientes_150.xlsx')
         pot_clientes_df = pot_clientes_df.fillna('')
         pot_table_rows = ''
         for _, row in pot_clientes_df.iterrows():
@@ -315,7 +315,7 @@ def generate_dashboard():
         
     df_clientes['Cidade_Match'] = df_clientes['Cidade'].apply(lambda x: remove_accents(str(x).split(' - ')[0]))
     try:
-        df_mun = pd.read_csv(r'C:\Users\Isac\Desktop\Planilhas geradas pela IA\municipios.csv')
+        df_mun = pd.read_csv(r'municipios.csv')
         df_mun['Cidade_Match'] = df_mun['nome'].apply(remove_accents)
         # Drop duplicates by city name to prevent explosion (using first occurrence)
         df_mun = df_mun.drop_duplicates(subset=['Cidade_Match'])
@@ -445,6 +445,22 @@ def generate_dashboard():
             
     except Exception as e:
         print("Erro em tempera:", e)
+        tempera_year_options_html = ""
+        tempera_yearly_tables_dict = {}
+        tempera_monthly_dict = {}
+        tempera_clients_labels = []
+        tempera_clients_data = []
+        tempera_total_str = "0,00"
+        tempera_labels = []
+        tempera_data = []
+        tempera_energy_data = []
+        tempera_yearly_labels = {}
+        tempera_yearly_data = {}
+        tempera_yearly_energy = {}
+        top_tempera_labels = []
+        top_tempera_data = []
+        tempera_table_html = ""
+        
         tempera_labels = []
         tempera_data = []
         tempera_yearly_labels = []
