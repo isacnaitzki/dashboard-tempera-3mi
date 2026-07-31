@@ -401,6 +401,15 @@ def generate_dashboard():
                 "2025": [0, 0, 0, 3437.94, 3317.45, 3831.39, 4429.39, 3830.65, 3364.3, 3832.14, 2982.75, 2835.48],
                 "2026": [2294.01, 3609.01, 3513.06, 3007.29, 3007.29, 2892.75, 0, 0, 0, 0, 0, 0]
             }
+            # ISAC'S PATCH: Custos totais (Energia + Jailson + Patrick + Transporte)
+            fixed_employee_cost = 10678 + 7639 + 2000
+            total_costs_dict = {}
+            for year, energies in energy_costs_dict.items():
+                total_costs_dict[year] = [
+                    (energies[i] + fixed_employee_cost) if (energies[i] > 0 or tempera_monthly_dict.get(year, [0]*12)[i] > 0) else 0 
+                    for i in range(12)
+                ]
+
 
             
             grp = df_tempera.groupby(['Ano', 'Mes'])['ValorTotalNF'].sum().reset_index()
@@ -460,6 +469,7 @@ def generate_dashboard():
         top_tempera_labels = []
         top_tempera_data = []
         tempera_table_html = ""
+        total_costs_dict = {}
         
         tempera_labels = []
         tempera_data = []
@@ -1219,7 +1229,7 @@ def generate_dashboard():
         // CHART: TEMPERA
         let temperaChartObj = null;
         let temperaMonthlyDict = {json.dumps(tempera_monthly_dict)};
-        let temperaEnergyDict = {json.dumps(energy_costs_dict)};
+        let temperaEnergyDict = {json.dumps(total_costs_dict)};
           let temperaYearlyTables = {json.dumps(tempera_yearly_tables_dict)};
         let temperaMonthLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
@@ -1236,7 +1246,7 @@ def generate_dashboard():
                     labels: temperaMonthLabels,
                     datasets: [
                           {{
-                              label: 'Custo de Energia (R$)',
+                              label: 'Custo Total (Energia + Equipe)',
                               data: (initialYear && temperaEnergyDict[initialYear]) ? temperaEnergyDict[initialYear] : [0,0,0,0,0,0,0,0,0,0,0,0],
                               borderColor: '#333333',
                               backgroundColor: 'rgba(51, 51, 51, 0.1)',
@@ -1365,9 +1375,20 @@ def generate_dashboard():
     # Wrap the filter in a nice floating panel
     filter_label = soup.find(string=lambda t: t and 'Filtrar Ano:' in t)
     if filter_label:
-        parent_div = filter_label.parent
+        label_tag = filter_label.parent
+        parent_div = label_tag.parent if label_tag else None
         if parent_div and parent_div.name == 'div':
             parent_div['style'] = 'background: white !important; padding: 15px 25px !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important; display: inline-flex !important; align-items: center !important; gap: 15px !important; margin-bottom: 30px !important; font-weight: 600 !important; color: #334155 !important;'
+
+            legenda_html = '''
+            <div style="margin-left: 30px; padding-left: 30px; border-left: 2px solid #e2e8f0; font-size: 13px; color: #64748b; line-height: 1.4; display: inline-block;">
+                <strong style="color: #A6192E; font-size: 14px;">&#8505;&#65039; Composicao do Custo (Incluso no Grafico)</strong><br>
+                <b>Equipe:</b> Jailson (R$ 10.678) + Patrick (R$ 7.639) &nbsp;|&nbsp; <b>Transporte:</b> R$ 2.000,00/mes
+            </div>
+            '''
+            from bs4 import BeautifulSoup as BS
+            legenda_soup = BS(legenda_html, 'html.parser')
+            parent_div.append(legenda_soup)
 
     # Injecting modern styles
     style_tag = soup.new_tag('style')
