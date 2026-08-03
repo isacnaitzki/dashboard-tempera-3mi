@@ -401,14 +401,6 @@ def generate_dashboard():
                 "2025": [0, 0, 0, 3437.94, 3317.45, 3831.39, 4429.39, 3830.65, 3364.3, 3832.14, 2982.75, 2835.48],
                 "2026": [2294.01, 3609.01, 3513.06, 3007.29, 3007.29, 2892.75, 0, 0, 0, 0, 0, 0]
             }
-            # ISAC'S PATCH: Custos totais (Energia + Jailson + Patrick + Transporte)
-            fixed_employee_cost = 10678 + 7639 + 2000
-            total_costs_dict = {}
-            for year, energies in energy_costs_dict.items():
-                total_costs_dict[year] = [
-                    (energies[i] + fixed_employee_cost) if (energies[i] > 0 or tempera_monthly_dict.get(year, [0]*12)[i] > 0) else 0 
-                    for i in range(12)
-                ]
 
 
             
@@ -418,6 +410,15 @@ def generate_dashboard():
                 mes = int(row['Mes']) - 1 # 0-indexed
                 tempera_monthly_dict[ano][mes] = float(row['ValorTotalNF'])
             
+            
+            # ISAC'S PATCH: Custos totais (Energia + Jailson + Patrick + Transporte + 15% Imposto)
+            fixed_employee_cost = 10678 + 7639 + 2000
+            total_costs_dict = {}
+            for year, energies in energy_costs_dict.items():
+                total_costs_dict[year] = [
+                    (energies[i] + fixed_employee_cost + (tempera_monthly_dict.get(year, [0]*12)[i] * 0.15)) if (energies[i] > 0 or tempera_monthly_dict.get(year, [0]*12)[i] > 0) else 0 
+                    for i in range(12)
+                ]
             
             tempera_anos_list = sorted(list(tempera_monthly_dict.keys()), reverse=True)
             tempera_year_options_html = "".join([f'<option value="{ano}">{ano}</option>' for ano in tempera_anos_list])
@@ -1383,7 +1384,8 @@ def generate_dashboard():
             legenda_html = '''
             <div style="margin-left: 30px; padding-left: 30px; border-left: 2px solid #e2e8f0; font-size: 13px; color: #64748b; line-height: 1.4; display: inline-block;">
                 <strong style="color: #A6192E; font-size: 14px;">&#8505;&#65039; Composicao do Custo (Incluso no Grafico)</strong><br>
-                <b>Equipe:</b> Jailson (R$ 10.678) + Patrick (R$ 7.639) &nbsp;|&nbsp; <b>Transporte:</b> R$ 2.000,00/mes
+                <b>Equipe:</b> Jailson (R$ 10.678) + Patrick (R$ 7.639) &nbsp;|&nbsp; <b>Transporte:</b> R$ 2.000,00/mes<br>
+                <b>Impostos:</b> 15% sobre o Faturamento Mensal
             </div>
             '''
             from bs4 import BeautifulSoup as BS
