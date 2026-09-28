@@ -9,18 +9,18 @@ def scrape_pedidos():
         'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
         'Connection': 'keep-alive',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': 'usuarioid=PATRICK; id=47; dbpath=r3; senha=BOB',
+        'Cookie': 'usuarioid=ISAC; id=24; dbpath=r3; senha=PINGP0NG',
         'Origin': 'http://177.200.204.3:8090',
         'Referer': 'http://177.200.204.3:8090/r3/_sistema.php',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
 
     # Added &search=preventiva and limit=1000000
-    payload = "codvalido=-1c-1c72c0c_uj8_2026_08_11_09_22_18_&route=_carregaplan.php&wr=r&tabelas=pedidos%2C%20perempinf%2C%20empresas%2C%20tipoexecucao%2C%20pedidosstatus%2C%20nfe%2C%20perrepresent&filtros=&searchfiltros=&listaRegistro=12&distinct=&linhasPorPagina=1000000&wheres=&searchcols=pedidos.id%5Enp%5E~CASE%20WHEN%20nfe.nnf%20IS%20NULL%20THEN%20NULL%20ELSE%20CONCATrpapapmnfe.nnf%3A%3Atext%2C%20rataptm-rataptm%2C%20nfe.serierpfppfm%20END%5Et%5E~CONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.nomerpfppfm%5Et%5E~CONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.razaorpfppfm%5Et%5E~pedidos.descricao%5Etx%5E~pedidos.nserie%5Eta%5E&search=preventiva&ordem=%20ORDER%20BY%20pedidos.id%20DESC%20NULLS%20LAST&wheremais=&veriUltTotReg=&tabctrrefresh=&colunas=pedidos.dtcadarpcmcperempinf.nomearpcmcperempinf.razaoarpcmcperempinf.cpfcnpjarpcmcpedidos.idarpcmcpedidos.propostatarpcmcpedidos.gantregarpcmcempresas.nomearpcmcempresas.razaoarpcmctipoexecucao.descricaoarpcmcpedidosstatus.statusarpcmcpedidos.descricaoarpcmcpedidos.entregaarpcmcpedidos.nseriearpcmcnfe.nffakearpcmcnfe.statusarpcmcperrepresent.nomearpcmcpedidos.valorosarpcmcpedidos.valorofarpcmcpedidos.vlfretearpcmcpedidos.totalarpcmcpedidos.recebidoarpcmcpedidos.arecebido&tipos=d%7Ct%7Ct%7Ct%7Cnp%7Ct%7Cb%7Ct%7Ct%7Ct%7Ct%7Ctx%7Cd%7Cta%7Ct%7Ct%7Ct%7Cf%7Cf%7Cf%7Cf%7Cf%7Cf&sobrecol=arpcmcarpcmcarpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20rpapapmSELECT%20gantt.id%20FROM%20gantt%20WHERE%20gantt.ex%20IS%20NULL%20AND%20gantt.nivel%20riipgm%201%20AND%20gantt.of%20riipgm%20pedidos.id%20LIMIT%201rpfppfm%20IS%20NULL%20THEN%20rataptmrataptm%20ELSE%20rataptmrsmmpmimg%20srcriipgmrppspm..rbbpbm..rbbpbm_imgrbbpbmrealizado.pngrppspm%20data-titleriipgmrppspmOKrppspm%20widthriipgmrppspm16pxrppspm%20heightriipgmrppspm16pxrppspm%20rbbpbmrmmssmrataptm%20END%20AS%20perganttarpcmcCONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.nomerpfppfm%20AS%20perclientearpcmcCONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.razaorpfppfm%20AS%20perazaoarpcmcarpcmcarpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20nfe.nnf%20IS%20NULL%20THEN%20NULL%20ELSE%20CONCATrpapapmnfe.nnf%3A%3Atext%2C%20rataptm-rataptm%2C%20nfe.serierpfppfm%20END%20AS%20fakenfearpcmcarpcmcarpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20pedidos.valoros%20IS%20NULL%20AND%20pedidos.valorof%20IS%20NULL%20AND%20pedidos.vlfrete%20IS%20NULL%20THEN%20NULL%20ELSE%20COALESCErpapapmpedidos.valoros%2C0rpfppfm%20%2B%20COALESCErpapapmpedidos.valorof%2C0rpfppfm%20%2B%20COALESCErpapapmpedidos.vlfrete%2C0rpfppfm%20END%20AS%20pertotalarpcmcarpcmc&carrLinha=-1&refresh=0&groupBy=&rolagem=0&sqlWith=&sqlFrom=pedidos%20LEFT%20JOIN%20infoempresa%20ON%20infoempresa.id%20riipgm%20pedidos.r3idemp%20LEFT%20JOIN%20empresas%20AS%20perempinf%20ON%20perempinf.id%20riipgm%20infoempresa.assoccad%20LEFT%20JOIN%20pedidosstatus%20ON%20pedidos.status%20riipgm%20pedidosstatus.id%20LEFT%20JOIN%20empresas%20ON%20empresas.id%20riipgm%20pedidos.empresa%20LEFT%20JOIN%20tipoexecucao%20ON%20tipoexecucao.id%20riipgm%20pedidos.tipoexecucao%20LEFT%20JOIN%20contaspagar%20ON%20contaspagar.id%20riipgm%20pedidos.idconr%20LEFT%20JOIN%20empresas%20AS%20perrepresent%20ON%20perrepresent.id%20riipgm%20pedidos.representante%20LEFT%20JOIN%20nfe%20ON%20contaspagar.idnfe%20riipgm%20nfe.id%20AND%20nfe.ex%20IS%20NULL%20&rotina=_modrbbpbmperbbpbmpe_cad_ofs_c.php&idp=0&selLinhaPlan=0&selColPlan=1&naofoca=0&carrCol=0&transfeinf=&frame=0&bdpadrao=1&tabpri=pedidos"
+    payload = "codvalido=-1c-1c31c0c_3ug_2026_09_25_16_20_29_&route=_carregaplan.php&wr=r&tabelas=pedidos%2C%20perempinf%2C%20empresas%2C%20tipoexecucao%2C%20pedidosstatus%2C%20nfe%2C%20perrepresent&filtros=&searchfiltros=&listaRegistro=100000&distinct=&linhasPorPagina=100000&wheres=&searchcols=pedidos.id%5Enp%5E~CASE%20WHEN%20nfe.nnf%20IS%20NULL%20THEN%20NULL%20ELSE%20CONCATrpapapmnfe.nnf%3A%3Atext%2C%20rataptm-rataptm%2C%20nfe.serierpfppfm%20END%5Et%5E~CONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.nomerpfppfm%5Et%5E~CONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.razaorpfppfm%5Et%5E~pedidos.descricao%5Etx%5E~pedidos.nserie%5Eta%5E&search=manuten%C3%A7%C3%A3o%20preventiva&ordem=%20ORDER%20BY%20pedidos.id%20DESC%20NULLS%20LAST&wheremais=&veriUltTotReg=&tabctrrefresh=&colunas=pedidos.dtcadarpcmcperempinf.nomearpcmcpedidos.idarpcmcperempinf.razaoarpcmcpedidos.gantregarpcmcperempinf.cpfcnpjarpcmcpedidos.propostatarpcmcempresas.nomearpcmctipoexecucao.descricaoarpcmcempresas.razaoarpcmcpedidosstatus.statusarpcmcpedidos.descricaoarpcmcpedidos.entregaarpcmcpedidos.nseriearpcmcnfe.nffakearpcmcnfe.statusarpcmcperrepresent.nomearpcmcpedidos.valorosarpcmcpedidos.valorofarpcmcpedidos.vlfretearpcmcpedidos.totalarpcmcpedidos.recebidoarpcmcpedidos.arecebido&tipos=d%7Ct%7Cnp%7Ct%7Cb%7Ct%7Ct%7Ct%7Ct%7Ct%7Ct%7Ctx%7Cd%7Cta%7Ct%7Ct%7Ct%7Cf%7Cf%7Cf%7Cf%7Cf%7Cf&sobrecol=arpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20rpapapmSELECT%20gantt.id%20FROM%20gantt%20WHERE%20gantt.ex%20IS%20NULL%20AND%20gantt.nivel%20riipgm%201%20AND%20gantt.of%20riipgm%20pedidos.id%20LIMIT%201rpfppfm%20IS%20NULL%20THEN%20rataptmrataptm%20ELSE%20rataptmrsmmpmimg%20srcriipgmrppspm..rbbpbm..rbbpbm_imgrbbpbmrealizado.pngrppspm%20data-titleriipgmrppspmOKrppspm%20widthriipgmrppspm16pxrppspm%20heightriipgmrppspm16pxrppspm%20rbbpbmrmmssmrataptm%20END%20AS%20perganttarpcmcarpcmcarpcmcCONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.nomerpfppfm%20AS%20perclientearpcmcarpcmcCONCATrpapapmempresas.id%2C%20rataptm%20-%20rataptm%2C%20empresas.razaorpfppfm%20AS%20perazaoarpcmcarpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20nfe.nnf%20IS%20NULL%20THEN%20NULL%20ELSE%20CONCATrpapapmnfe.nnf%3A%3Atext%2C%20rataptm-rataptm%2C%20nfe.serierpfppfm%20END%20AS%20fakenfearpcmcarpcmcarpcmcarpcmcarpcmcarpcmcCASE%20WHEN%20pedidos.valoros%20IS%20NULL%20AND%20pedidos.valorof%20IS%20NULL%20AND%20pedidos.vlfrete%20IS%20NULL%20THEN%20NULL%20ELSE%20COALESCErpapapmpedidos.valoros%2C0rpfppfm%20%2B%20COALESCErpapapmpedidos.valorof%2C0rpfppfm%20%2B%20COALESCErpapapmpedidos.vlfrete%2C0rpfppfm%20END%20AS%20pertotalarpcmcarpcmc&carrLinha=-1&refresh=0&groupBy=&rolagem=0&sqlWith=&sqlFrom=pedidos%20LEFT%20JOIN%20infoempresa%20ON%20infoempresa.id%20riipgm%20pedidos.r3idemp%20LEFT%20JOIN%20empresas%20AS%20perempinf%20ON%20perempinf.id%20riipgm%20infoempresa.assoccad%20LEFT%20JOIN%20pedidosstatus%20ON%20pedidos.status%20riipgm%20pedidosstatus.id%20LEFT%20JOIN%20empresas%20ON%20empresas.id%20riipgm%20pedidos.empresa%20LEFT%20JOIN%20tipoexecucao%20ON%20tipoexecucao.id%20riipgm%20pedidos.tipoexecucao%20LEFT%20JOIN%20contaspagar%20ON%20contaspagar.id%20riipgm%20pedidos.idconr%20LEFT%20JOIN%20empresas%20AS%20perrepresent%20ON%20perrepresent.id%20riipgm%20pedidos.representante%20LEFT%20JOIN%20nfe%20ON%20contaspagar.idnfe%20riipgm%20nfe.id%20AND%20nfe.ex%20IS%20NULL%20&rotina=_modrbbpbmperbbpbmpe_cad_ofs_c.php&idp=0&selLinhaPlan=0&selColPlan=1&naofoca=0&carrCol=0&transfeinf=&frame=0&bdpadrao=1&tabpri=pedidos"
 
     cols_names = [
-        "DataCadastro", "NomeInfo", "RazaoInfo", "CNPJInfo", "PedidoID", "Proposta", 
-        "Gantt", "ClienteNome", "ClienteRazao", "TipoExecucao", "StatusPedido", 
+        "DataCadastro", "NomeInfo", "PedidoID", "RazaoInfo", "Gantt", "CNPJInfo", 
+        "Proposta", "ClienteNome", "TipoExecucao", "ClienteRazao", "StatusPedido", 
         "Descricao", "DataEntrega", "NumSerie", "NFe", "NFeStatus", 
         "Representante", "ValorOS", "ValorOF", "ValorFrete", "Total", 
         "Recebido", "AReceber"
@@ -43,7 +43,7 @@ def scrape_pedidos():
         print("No valid data retrieved!")
         return
 
-    for line in data_lines[2:]:
+    for line in data_lines[1:]:
         if not line.strip():
             continue
         cells = line.split('|')
@@ -64,10 +64,22 @@ def scrape_pedidos():
 
     df = pd.DataFrame(parsed_data)
     
-    # Exclude rows where Descricao contains 'preventivamente'
+    # Exclude rows where Descricao contains specific false-positive keywords
     if 'Descricao' in df.columns:
-        mask = ~df['Descricao'].str.contains('preventivamente', case=False, na=False)
+        words_to_exclude = ['preventivamente', 'sugestão', 'sugestao', 'sugerimos', 'sugere', 'sugerido', 'recomendamos', 'recomenda-se', 'recomendação', 'recomendacao']
+        pattern = '|'.join(words_to_exclude)
+        mask = ~df['Descricao'].str.contains(pattern, case=False, na=False)
         df = df[mask]
+        
+    # Exclude specific duplicated order 8447 (keep only 8466)
+    if 'PedidoID' in df.columns:
+        df = df[df['PedidoID'].astype(str) != '8447']
+        
+    # Exclude representative Viviane
+    if 'Representante' in df.columns:
+        mask = ~df['Representante'].str.contains('VIVIANE', case=False, na=False)
+        df = df[mask]
+
     
     print(f"Total rows after filtering 'preventivamente': {len(df)}")
     
