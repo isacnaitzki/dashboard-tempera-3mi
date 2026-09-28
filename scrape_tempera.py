@@ -83,6 +83,9 @@ def scrape_tempera():
     except Exception as e:
         print("Warning type conv:", e)
         
+    # FILTRAR APENAS TEMPERA (CFOP 5.124 e 6.124)
+    df = df[df['CFOP'].astype(str).str.contains('5.124|6.124', na=False)]
+        
     out_path = r"Tempera_Itens.xlsx"
     df.to_excel(out_path, index=False)
     print(f"Saved {len(df)} rows to {out_path}")
