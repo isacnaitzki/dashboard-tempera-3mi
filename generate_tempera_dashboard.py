@@ -5,6 +5,7 @@ import json
 import os
 
 def generate_dashboard():
+    total_costs_dict = {}
     # Load Data
     # --- LOAD CRM DATA ---
     try:
@@ -505,7 +506,7 @@ def generate_dashboard():
 
     # -- NOVO: LOGO DA 3MI --
     logo_base64 = ""
-    logo_path = r'C:\Users\Isac\Desktop\logo_3mi.png'
+    logo_path = 'logo_3mi.png'
     try:
         import base64
         if os.path.exists(logo_path):
@@ -824,7 +825,7 @@ def generate_dashboard():
 
     <script>
 
-        function switchTab(tabId, element) {{
+                function switchTab(tabId, element) {{
             if(tabId === 'mapa' && typeof initMap === 'function') {{
                 setTimeout(initMap, 100);
             }}
@@ -837,11 +838,9 @@ def generate_dashboard():
             if (element) {{
                 element.classList.add('active');
                 
-                // Limpar emojis do titulo removendo o primeiro caractere que e o emoji
-                let cleanText = element.innerText;
-                if(cleanText.length > 2) {{
-                    cleanText = cleanText.substring(2).trim();
-                }}
+                // Limpar emojis do titulo
+                let cleanText = element.innerText.trim();
+                cleanText = cleanText.replace(/^[^\w\u00C0-\u00FF]+/, '').trim();
                 document.getElementById('pageTitle').innerText = cleanText + " - Inteligência Comercial";
             }}
             
@@ -853,8 +852,8 @@ def generate_dashboard():
             }}
             if(tabId === 'tempera') {{
                 setTimeout(function(){{ 
-                    if(temperaChartObj) temperaChartObj.resize();
-                    if(window.temperaPieChartObj) window.temperaPieChartObj.resize();
+                    if(typeof temperaChartObj !== 'undefined' && temperaChartObj) temperaChartObj.resize();
+                    if(typeof window.temperaPieChartObj !== 'undefined' && window.temperaPieChartObj) window.temperaPieChartObj.resize();
                 }}, 100);
             }}
         }}
@@ -1379,7 +1378,7 @@ def generate_dashboard():
         
         import base64
         bg_image_b64 = ""
-        bg_img_path = r"C:\Users\Isac\.gemini\antigravity\brain\2d649164-d2ba-4664-b016-e7baaabdcb35\induction_hardening_bg_1785755587127.png"
+        bg_img_path = "bg_tempera.png"
         try:
             with open(bg_img_path, "rb") as image_file:
                 bg_image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
@@ -1387,7 +1386,10 @@ def generate_dashboard():
             pass
             
         # Apply premium gradient to topbar with subtle pattern
-        topbar['style'] = 'background: linear-gradient(rgba(0,0,0,0.65), rgba(138, 18, 36, 0.90)), url("data:image/png;base64,' + bg_image_b64 + '"); background-size: cover; background-position: center; border-bottom: 4px solid #F5C04F; box-shadow: 0 4px 15px rgba(0,0,0,0.3); padding: 30px 20px;'
+        if bg_image_b64:
+            topbar['style'] = 'background: linear-gradient(rgba(0,0,0,0.65), rgba(138, 18, 36, 0.90)), url("data:image/png;base64,' + bg_image_b64 + '"); background-size: cover; background-position: center; border-bottom: 4px solid #F5C04F; box-shadow: 0 4px 15px rgba(0,0,0,0.3); padding: 30px 20px;'
+        else:
+            topbar['style'] = 'background: linear-gradient(rgba(0,0,0,0.65), rgba(138, 18, 36, 0.90)); border-bottom: 4px solid #F5C04F; box-shadow: 0 4px 15px rgba(0,0,0,0.3); padding: 30px 20px;'
 
     # --- isac_manutencao_patch start ---
     try:
