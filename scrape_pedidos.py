@@ -73,9 +73,9 @@ def scrape_pedidos():
         mask = ~df['Descricao'].str.contains(pattern, case=False, na=False)
         df = df[mask]
         
-    # Exclude specific duplicated order 8447 (keep only 8466)
+    # Exclude specific orders (8447 duplicated, 8564 non-revenue)
     if 'PedidoID' in df.columns:
-        df = df[df['PedidoID'].astype(str) != '8447']
+        df = df[~df['PedidoID'].astype(str).isin(['8447', '8564'])]
         
     # Exclude representative Viviane
     if 'Representante' in df.columns:
