@@ -98,3 +98,8 @@ def scrape_tempera():
 
 if __name__ == '__main__':
     scrape_tempera()
+    try:
+        from scrape_pedidos import scrape_pedidos
+        scrape_pedidos()
+    except Exception as e:
+        print("Erro ao rodar scrape_pedidos:", e)
